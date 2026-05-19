@@ -4,8 +4,16 @@ import Venta from './model/venta.js';
 
 const app = express();
 app.use(express.json());
-// Sincronizar modelos con SQLite
-await sequelize.sync();
+
+// Inicialización asíncrona de la base de datos
+try {
+await sequelize.authenticate();
+console.log('Conexión con PostgreSQL establecida correctamente.');
+await sequelize.sync(); // Crea la tabla en la nube si no existe
+} catch (error) {
+console.error('Error al inicializar la base de datos:', error);
+}
+
 // --- CRUD BÁSICO ---
 app.get('/ventas', async (req, res) => {
 const ventas = await Venta.findAll();
@@ -49,4 +57,4 @@ app.get('/ventas/orden/fecha', async (req, res) => {
 const ventas = await Venta.findAll({ order: [['fecha', 'ASC']] });
 res.json(ventas);
 });
-app.listen(process.env.PORT, () => console.log('API lista en http://localhost:3000'));
+app.listen(process.env.PORT | 3001, () => console.log('API lista en http://localhost:3000'));
