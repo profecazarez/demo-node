@@ -57,4 +57,9 @@ app.get('/ventas/orden/fecha', async (req, res) => {
 const ventas = await Venta.findAll({ order: [['fecha', 'ASC']] });
 res.json(ventas);
 });
+
+app.get('/saludo', (req, res) => {
+  res.send('Hola ...');
+});
+
 app.listen(process.env.PORT | 3001, () => console.log('API lista en http://localhost:3000'));
