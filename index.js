@@ -58,5 +58,9 @@ const ventas = await Venta.findAll({ order: [['fecha', 'ASC']] });
 res.json(ventas);
 });
 
+app.get('/', async (req, res) => {
+res.send('API funcionando ...');
+});
+
 
 app.listen(process.env.PORT | 3001, () => console.log('API lista en http://localhost:3000'));
