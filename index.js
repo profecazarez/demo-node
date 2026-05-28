@@ -66,5 +66,9 @@ app.get('/saludo', async (req, res) => {
 res.send('Saludo desde API ...');
 });
 
+app.get('/bienvenido', async (req, res) => {
+res.send('Bienvenidos desde la API ...');
+});
+
 
 app.listen(process.env.PORT | 3001, () => console.log('API lista en http://localhost:3000'));
